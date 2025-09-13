@@ -1,5 +1,6 @@
-def fix_label(file):
-    with open(file, "r") as f:
+import os
+def fix_label(folder,file):
+    with open(os.path.join(folder,file), "r") as f:
         lines = f.readlines()
         fixed_lines = []
         for line in lines:
@@ -23,11 +24,24 @@ def fix_label(file):
             else:
                 # if line is malformed, keep it as it is
                 fixed_lines.append(line)
-    
-    with open(file, "r+") as f:
-        f.seek(0)
-        f.truncate()
-        f.writelines(fixed_lines)
+    if file=='train.txt':
+        file="train_fix.txt"
+        with open(os.path.join(folder,file), "w") as f:
+            f.seek(0)
+            f.truncate()
+            f.writelines(fixed_lines)
+    elif file=='val.txt':
+        file="val.txt"
+        with open(os.path.join(folder,file), "w") as f:
+            f.seek(0)
+            f.truncate()
+            f.writelines(fixed_lines)
+    elif file=='test.txt':
+        file="test_fix.txt"
+        with open(os.path.join(folder,file), "w") as f:
+            f.seek(0)
+            f.truncate()
+            f.writelines(fixed_lines)
 
 if __name__=="__main__":
     fix_label("dataset/labels/train.txt")

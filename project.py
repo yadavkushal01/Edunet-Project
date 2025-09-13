@@ -18,9 +18,9 @@ epochs = 40
 data_dir = "C:\\msys64\\home\\kushal yadav\\Project_Edunet_internship\\project_opencv\\dataset\\images"
 
 # Fixing labels in .txt file
-fix.fix_label("C:\\msys64\\home\\kushal yadav\\Project_Edunet_internship\\project_opencv\\dataset\\labels\\train.txt")
-fix.fix_label("C:\\msys64\\home\\kushal yadav\\Project_Edunet_internship\\project_opencv\\dataset\\labels\\val.txt")
-fix.fix_label("C:\\msys64\\home\\kushal yadav\\Project_Edunet_internship\\project_opencv\\dataset\\labels\\test.txt")
+fix.fix_label("C:\\msys64\\home\\kushal yadav\\Project_Edunet_internship\\project_opencv\\dataset\\labels","train.txt")
+fix.fix_label("C:\\msys64\\home\\kushal yadav\\Project_Edunet_internship\\project_opencv\\dataset\\labels","val.txt")
+fix.fix_label("C:\\msys64\\home\\kushal yadav\\Project_Edunet_internship\\project_opencv\\dataset\\labels","test.txt")
 
 # Map class labels to folder name
 class_map = {
