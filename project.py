@@ -14,7 +14,7 @@ import fix_labels as fix
 # Parameters
 img_size = (128, 128)
 batch_size = 32
-epochs = 40
+epochs = 20
 data_dir = "C:\\msys64\\home\\kushal yadav\\Project_Edunet_internship\\project_opencv\\dataset\\images"
 
 # Fixing labels in .txt file
