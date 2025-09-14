@@ -31,7 +31,7 @@ def fix_label(folder,file):
             f.truncate()
             f.writelines(fixed_lines)
     elif file=='val.txt':
-        file="val.txt"
+        file="val_fix.txt"
         with open(os.path.join(folder,file), "w") as f:
             f.seek(0)
             f.truncate()
