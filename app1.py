@@ -3,14 +3,14 @@ import numpy as np
 import pandas as pd
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
-import altair as alt
+import matplotlib.pyplot as plt
 
 # Constants
 IMG_SIZE = (128, 128)
 CLASS_NAMES = ["cardboard", "glass", "metal", "paper", "plastic", "trash"]
 
 # Page config
-st.set_page_config(page_title="♻️ Smart Garbage Classification", layout="centered")
+st.set_page_config(page_title="♻️ Waste Classification", layout="centered")
 
 # Load trained model
 @st.cache_resource
@@ -53,7 +53,7 @@ st.markdown(
 )
 
 # --- Page Title ---
-st.markdown('<div class="main-title">♻️ Smart Garbage Classification</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-title">♻️ Waste Classification</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-title">Upload an image of waste material and let AI classify it!</div>', unsafe_allow_html=True)
 
 # --- Upload Section ---
@@ -61,7 +61,7 @@ uploaded_file = st.file_uploader("📂 Upload an Image", type=["jpg", "jpeg", "p
 
 if uploaded_file is not None and model is not None:
     # Show uploaded image
-    st.image(uploaded_file, caption="🖼 Uploaded Image", use_container_width=True)
+    st.image(uploaded_file, caption="🖼 Image Uploaded", use_container_width=True)
 
     # Process image
     img = load_img(uploaded_file, target_size=IMG_SIZE)
@@ -85,27 +85,34 @@ if uploaded_file is not None and model is not None:
     )
 
     # Confidence distribution chart
-    st.subheader("📊 Class Probabilities")
+    st.subheader("📊 Probabilities")
 
     probs_df = pd.DataFrame({
         "Class": CLASS_NAMES,
         "Probability": pred[0]
     })
 
-    # Horizontal bar chart using Altair
-    chart = (
-        alt.Chart(probs_df)
-        .mark_bar(cornerRadius=5)
-        .encode(
-            x=alt.X("Probability:Q", scale=alt.Scale(domain=[0, 1])),
-            y=alt.Y("Class:N", sort="-x"),
-            color=alt.Color("Class:N", legend=None, scale=alt.Scale(scheme="set2")),
-            tooltip=["Class", alt.Tooltip("Probability", format=".2%")]
-        )
-        .properties(height=300)
-    )
+    
 
-    st.altair_chart(chart, use_container_width=True)
+    explode = [0.1 if i == pred_class else 0 for i in range(len(CLASS_NAMES))]
+
+    labels = [
+        CLASS_NAMES[i] if pred[0][i] > 0.01 else ""  # show only >1%
+        for i in range(len(CLASS_NAMES))
+    ]
+
+    fig, ax = plt.subplots()
+    ax.pie(
+        probs_df["Probability"],
+        labels=labels,
+        autopct=lambda p: f"{p:.1f}%" if p > 1 else "",  # hide <1%
+        startangle=90,
+        explode=explode,
+        colors=plt.cm.Set3.colors,  # nice color palette
+        textprops={"fontsize": 12}
+    )
+    ax.axis("equal")  # Circle shape
+    st.pyplot(fig)
 
 else:
     st.info("⬆️ Please upload an image above to start classification.")

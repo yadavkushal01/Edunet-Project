@@ -1,5 +1,4 @@
 numpy
 tensorflow
 keras
-joblib
-flask
+streamlit
