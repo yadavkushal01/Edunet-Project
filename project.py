@@ -3,11 +3,10 @@ import numpy as np
 import tensorflow as tf
 from tensorflow.keras.preprocessing.image import load_img, img_to_array,ImageDataGenerator
 from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Dense, GlobalAveragePooling2D, Dropout, Input
+from tensorflow.keras.layers import Dense, GlobalAveragePooling2D, Dropout
 from tensorflow.keras.applications import MobileNetV2
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.callbacks import ReduceLROnPlateau, EarlyStopping
-import joblib
 import fix_labels as fix
 
 
@@ -117,19 +116,15 @@ test_loss, test_acc = model.evaluate(X_test, y_test)
 model.save("garbage_classifier.h5")
 
 
-# # predict image
-# class_names = ["cardboard", "glass", "paper", "metal", "plastic", "trash"]
+# predict image
+class_names = ["cardboard", "glass", "paper", "metal", "plastic", "trash"]
 
-# img_path = "sample_image.jpeg"
-# img = load_img(img_path, target_size=img_size)
-# x = img_to_array(img) / 255.0
-# x = np.expand_dims(x, axis=0)
+img_path = "sample_image.jpeg"
+img = load_img(img_path, target_size=img_size)
+x = img_to_array(img) / 255.0
+x = np.expand_dims(x, axis=0)
 
-# pred = model.predict(x)
-# pred_class = np.argmax(pred)
-# # print(f" Prediction: {class_names[pred_class]}")
+pred = model.predict(x)
+pred_class = np.argmax(pred)
+# print(f" Prediction: {class_names[pred_class]}")
 
-
-# # Dump model using joblib
-# joblib.dump(model, 'waste_model.joblib')
-# print("Model saved as waste_model.joblib")

@@ -54,10 +54,10 @@ st.markdown(
 
 # --- Page Title ---
 st.markdown('<div class="main-title">♻️ Waste Classification</div>', unsafe_allow_html=True)
-st.markdown('<div class="sub-title">Upload an image of waste material and let AI classify it!</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-title">Upload an image of waste material and let Model Classify It!</div>', unsafe_allow_html=True)
 
 # --- Upload Section ---
-uploaded_file = st.file_uploader("📂 Upload an Image", type=["jpg", "jpeg", "png"], help="Upload a waste material image")
+uploaded_file = st.file_uploader("📂 Upload Image", type=["jpg", "jpeg", "png"], help="Upload a waste material image")
 
 if uploaded_file is not None and model is not None:
     # Show uploaded image
@@ -74,10 +74,16 @@ if uploaded_file is not None and model is not None:
     confidence = np.max(pred)
 
     # Display result in styled box
+    mess=""
+    if CLASS_NAMES[pred_class] not in ['trash']:
+        mess="Recyclable"
+    else:
+        mess="Non-Recyclable"
+
     st.markdown(
         f"""
         <div class="result-box">
-            <h3 style= "color: #006666;">🔍 Prediction: <b>{CLASS_NAMES[pred_class].capitalize()}</b></h3>
+            <h3 style= "color: #006666;">🔍 Prediction: <b>{mess}</b> <b>{CLASS_NAMES[pred_class].capitalize()}</b></h3>
             <p style="font-size:18px; color: #006666;">Confidence: <b>{confidence * 100:.2f}%</b></p>
         </div>
         """,
