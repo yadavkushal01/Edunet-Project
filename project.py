@@ -61,9 +61,9 @@ def load_data(txt_file, img_size=(128, 128)):
 
 
 # Load train, val, test .txt files
-X_train, y_train = load_data("C:\\msys64\\home\\kushal yadav\\Project_Edunet_internship\\project_opencv\\dataset\\labels\\train.txt")
-X_val, y_val     = load_data("C:\\msys64\\home\\kushal yadav\\Project_Edunet_internship\\project_opencv\\dataset\\labels\\val.txt")
-X_test, y_test   = load_data("C:\\msys64\\home\\kushal yadav\\Project_Edunet_internship\\project_opencv\\dataset\\labels\\test.txt")
+X_train, y_train = load_data("C:\\msys64\\home\\kushal yadav\\Project_Edunet_internship\\project_opencv\\dataset\\labels\\train_fix.txt")
+X_val, y_val     = load_data("C:\\msys64\\home\\kushal yadav\\Project_Edunet_internship\\project_opencv\\dataset\\labels\\val_fix.txt")
+X_test, y_test   = load_data("C:\\msys64\\home\\kushal yadav\\Project_Edunet_internship\\project_opencv\\dataset\\labels\\test_fix.txt")
 
 num_classes = len(class_map)  # cardboard, glass, paper, metal, plastic, trash
 

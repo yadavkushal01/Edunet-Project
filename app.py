@@ -42,7 +42,7 @@ def predict():
     os.remove(file_path)
 
     if pred_class not in ['trash']:
-        return jsonify({'class': 'Recyclable', 'confidence': confidence})
+        return jsonify({'class': f'Recyclable {pred_class}', 'confidence': confidence})
     else :
         return jsonify({'class':'Non-Recyclable', 'confidence': confidence})
     
