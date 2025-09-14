@@ -44,7 +44,7 @@ def predict():
     if pred_class not in ['trash']:
         return jsonify({'class': f'Recyclable {pred_class}', 'confidence': confidence})
     else :
-        return jsonify({'class':'Non-Recyclable', 'confidence': confidence})
+        return jsonify({'class':f'Non-Recyclable {pred_class}', 'confidence': confidence})
     
     # return jsonify({'class':pred_class, 'confidence':confidence})
 if __name__ == '__main__':
