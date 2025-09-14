@@ -114,20 +114,22 @@ history = model.fit(
 test_loss, test_acc = model.evaluate(X_test, y_test)
 # print(f"Test Accuracy: {test_acc*100:.2f}%")
 
-
-# predict image
-class_names = ["cardboard", "glass", "paper", "metal", "plastic", "trash"]
-
-img_path = "sample_image.jpeg"
-img = load_img(img_path, target_size=img_size)
-x = img_to_array(img) / 255.0
-x = np.expand_dims(x, axis=0)
-
-pred = model.predict(x)
-pred_class = np.argmax(pred)
-# print(f"🔎 Prediction: {class_names[pred_class]}")
+model.save("garbage_classifier.h5")
 
 
-# Dump model using joblib
-joblib.dump(model, 'waste_model.joblib')
-print("Model saved as waste_model.joblib")
+# # predict image
+# class_names = ["cardboard", "glass", "paper", "metal", "plastic", "trash"]
+
+# img_path = "sample_image.jpeg"
+# img = load_img(img_path, target_size=img_size)
+# x = img_to_array(img) / 255.0
+# x = np.expand_dims(x, axis=0)
+
+# pred = model.predict(x)
+# pred_class = np.argmax(pred)
+# # print(f" Prediction: {class_names[pred_class]}")
+
+
+# # Dump model using joblib
+# joblib.dump(model, 'waste_model.joblib')
+# print("Model saved as waste_model.joblib")
